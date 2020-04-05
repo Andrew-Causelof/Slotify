@@ -1,21 +1,29 @@
+<?php include("includes/header.php"); ?>
 
-<?php
+<h1 class="pageHeadingBig"> You Might Also Like </h1>
 
-include("includes/config.php");
+	<div class="gridViewContainer">
+		<?php
+			$albumQuery = mysqli_query($con," SELECT * FROM albums ORDER BY RAND() LIMIT 10");
+			while($row= mysqli_fetch_array($albumQuery)) {
 
-if(isset($_SESSION['userLoggedIn'])){
-	$userLoggedIn = $_SESSION['userLoggedIn'];
-} else {
-	header("Location: register.php");
-}
-?>
+				
+				echo "<div class='gridViewItem'> 
+					<a href= 'album.php?id=". $row['id'] ."'>
+					<img src='". $row['artworkPath'] ."'>
+					<div class='gridViewInfo'>"
+						. $row['title'] .
+					"</div>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Welcome to Slotify!</title>
-</head>
-<body>
-	Hello!
-</body>
-</html>
+				</div>";
+			}
+		?>
+	</div>
+
+
+
+
+
+<?php include("includes/footer.php") ?>
+
+
