@@ -1,35 +1,42 @@
-<?php include("includes/includedFiles.php");
+<?php
+include("includes/includedFiles.php");
+
 
 if(isset($_GET['id'])){
-	$albumId = $_GET['id'];
+	$artistId = $_GET['id'];
 } else {
 	header("Location: index.php");
 }
 
-$album = new Album($con, $albumId);
-$artist = $album->getArtist();
+$artist = new Artist($con, $artistId)
+
 ?>
 
-	<div class= "entityInfo">
-		<div class="leftSection">
-		  <img src="<?php echo $album->getArtWorkPath() ?>">	
-		</div>
+<div class="entityInfo borderBottom">
+	<div class="centerSection">
+		<div class='artistInfo'>
+			<h1 class="artistName"> <?php echo $artist->getName(); ?> </h1>
 
-		<div class= "rightSection"> 
-			<h2> <?php echo $album->getTitle(); ?> </h2>
-			 <p>By <?php echo $artist->getName(); ?> </p>
-			 <p><?php echo $album->getNumberOfSongs(); ?> songs </p>
+			<div class="headerButtons">
+				<button class="button green" onclick="playFirstSong()"">PLAY</button>
+			</div>
 		</div>
 	</div>
+</div>
 
-	<div class="trackListContainer">
+<div class="trackListContainer borderBottom">
+	<h2>SONGS</h2>
 		<ul class ="tracklist">
 			<?php
-			$songIdArray = $album->getSongIds();
+			$songIdArray = $artist->getSongIds();
 
 			$i = 1;
 
 			foreach ($songIdArray as $songId) {
+
+				if($i > 5) {
+					break;
+				}
 
 				$albumSong = new Song($con, $songId);
 				$albumArtist = $albumSong->getArtist();
@@ -67,5 +74,21 @@ $artist = $album->getArtist();
 			</script>
 		</ul>
 		
-	</div>
+</div>
 
+<div class="gridViewContainer">
+	<h2>ALBUMS</h2>
+		<?php
+			$albumQuery = mysqli_query($con," SELECT * FROM albums WHERE artist='$artistId'");
+			while($row= mysqli_fetch_array($albumQuery)) {
+
+				
+				echo "<div class='gridViewItem'> 
+						<span role='link' tabindex='0' onclick='openPage(\"album.php?id=". $row['id']."\")'> 
+							<img src='". $row['artworkPath'] ."'>
+							<div class='gridViewInfo'>" . $row['title'] . "</div>
+						</span>	
+				    </div>";
+			}
+		?>
+	</div>
