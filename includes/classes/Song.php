@@ -1,7 +1,7 @@
 <?php
 	class Song {
 
-        private $con;
+		private $con;
 		private $id;
 		private $mysqliData;
 		private $title;
@@ -26,15 +26,15 @@
 		}
 
 		public function getTitle() {
-			return $this-> title;
+			return $this->title;
 		}
 
 		public function getId() {
-			return $this-> id;
+			return $this->id;
 		}
 
 		public function getArtist() {
-			return new Artist($this->con,$this->artistId);
+			return new Artist($this->con, $this->artistId);
 		}
 
 		public function getAlbum() {
@@ -42,21 +42,20 @@
 		}
 
 		public function getPath() {
-			return $this-> path;
+			return $this->path;
 		}
 
 		public function getDuration() {
-			return $this-> duration;
+			return $this->duration;
 		}
 
 		public function getMysqliData() {
-			return $this-> mysqliData;
+			return $this->mysqliData;
 		}
 
 		public function getGenre() {
-			return $this-> genre;
+			return $this->genre;
 		}
 
-		
 	}
 ?>
