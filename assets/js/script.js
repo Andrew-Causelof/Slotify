@@ -9,6 +9,27 @@ var shuffle = false;
 var userLoggedIn;
 var timer;
 
+$(document).click(function(click) {
+   var target = $(click.target);
+
+   if(!target.hasClass("item") && !target.hasClass("optionsButton")) {
+   	 hideOptionsMenu();
+   }
+});
+
+$(window).scroll(function(){
+	hideOptionsMenu();
+});
+
+$(document).on("change", "select.playlist", function() {
+	var playlistId = $(this).val();
+	var songId = $(this).prev(".songId").val();
+
+	console.log("playlistId: " + playlistId);
+	console.log("songId: " + songId);
+});
+
+
 function openPage(url) {
 
 	if(timer != null) {
@@ -40,6 +61,51 @@ function createPlaylist() {
 		});
 
 	}
+}
+function deletePlaylist(playlistId) {
+	var prompt = confirm("Are you sure you want to delete this playlist ?");
+
+	if (prompt == true ) {
+		$.post("includes/handlers/ajax/deletePlaylist.php", {playlistId: playlistId}).done(function(error){
+
+			if(error != ""){
+				alert(error);
+				return;
+			}
+			// do something when ajax returns
+			openPage("yourMusic.php");
+		});
+	}
+
+}
+
+function hideOptionsMenu() {
+	var menu = $(".optionsMenu")
+	if(menu.css("display") != "none" ){
+		menu.css("display", "none"); 
+	}
+
+
+}
+
+function showOptionsMenu(button) {
+
+	var songId = $(button).prevAll(".songId").val();
+
+	var menu = $(".optionsMenu");
+	var menuWidth = menu.width();
+
+	menu.find(".songId").val(songId);
+
+	var scrollTop = $(window).scrollTop();
+	var elementOfset = $(button).offset().top;
+
+
+	var top = elementOfset - scrollTop;
+	var left = $(button).position().left;
+
+	menu.css({"top": top + "px", "left": left - menuWidth + "px", "display": "inline" })
+
 }
 
 function formatTime(seconds) {

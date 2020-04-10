@@ -39,8 +39,6 @@ include("includes/includedFiles.php");
 
 					</div>";
 
-
-
 			}
 		?>
 
