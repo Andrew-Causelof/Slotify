@@ -20,7 +20,7 @@ $artistId = $artist->getId();
 
 	<div class="rightSection">
 		<h2><?php echo $album->getTitle(); ?></h2>
-		<p role="link" tabindex="0" onclick="openPage('artist.php?id=$artistId')">By <?php echo $artist->getName(); ?></p>
+		<p role="link" tabindex="0" onclick="openPage('artist.php?id=<?php echo $artistId; ?>')">By <?php echo $artist->getName(); ?></p>
 		<p><?php echo $album->getNumberOfSongs(); ?> songs</p>
 
 	</div>
@@ -53,7 +53,7 @@ $artistId = $artist->getId();
 					</div>
 
 					<div class='trackOptions'>
-					    <input type='hidden' class='songId' value=' " . $albumSong->getId() . " '>
+						<input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
 						<img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
 					</div>
 
@@ -80,8 +80,12 @@ $artistId = $artist->getId();
 
 <nav class="optionsMenu">
 	<input type="hidden" class="songId">
-	 <?php echo Playlist:: getPlaylistDropdown($con, $userLoggedIn->getUsername()); ?>
-	<div class="item">Item 2</div>
-	<div class="item">Item 3</div>
-
+	<?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
 </nav>
+
+
+
+
+
+
+

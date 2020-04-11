@@ -79,7 +79,8 @@ $(function() {
 					</div>
 
 					<div class='trackOptions'>
-						<img class='optionsButton' src='assets/images/icons/more.png'>
+						<input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
+						<img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
 					</div>
 
 					<div class='trackDuration'>
@@ -108,7 +109,7 @@ $(function() {
 	<h2>ARTISTS</h2>
 
 	<?php
-	$artistsQuery = mysqli_query($con, "SELECT id FROM artist WHERE name LIKE '$term%' LIMIT 10");
+	$artistsQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
 	
 	if(mysqli_num_rows($artistsQuery) == 0) {
 		echo "<span class='noResults'>No artists found matching " . $term . "</span>";
@@ -166,6 +167,11 @@ $(function() {
 	?>
 
 </div>
+
+<nav class="optionsMenu">
+	<input type="hidden" class="songId">
+	<?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
 
 
 

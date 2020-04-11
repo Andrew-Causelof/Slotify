@@ -64,7 +64,7 @@
 						<input id="loginPassword" name="loginPassword" type="password" placeholder="Your password" required>
 					</p>
 
-					<button type="submit" name="loginButton">LOG IN</button>
+					<button class="buttonSubmit" type="submit" name="loginButton">LOG IN</button>
 
 					<div class="hasAccountText">
 						<span id="hideLogin">Don't have an account yet? Signup here.</span>
@@ -121,7 +121,7 @@
 						<input id="password2" name="password2" type="password" placeholder="Your password" required>
 					</p>
 
-					<button type="submit" name="registerButton">SIGN UP</button>
+					<button class="buttonSubmit" type="submit" name="registerButton">SIGN UP</button>
 
 					<div class="hasAccountText">
 						<span id="hideRegister">Already have an account? Log in here.</span>

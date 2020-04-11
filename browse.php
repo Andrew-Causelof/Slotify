@@ -24,9 +24,6 @@ include("includes/includedFiles.php");
 					</span>
 
 				</div>";
-
-
-
 		}
 	?>
 
